@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:scorpion_alarm_app/model/alarmModel.dart';
+import 'package:scorpion_alarm_app/router/router.dart';
 import 'package:scorpion_alarm_app/widget/alarmItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,8 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<String> alarmTimeList = List();
-  List<String> alarmNameList = List();
+  List<AlarmModel> alarmList = List();
 
   @override
   void initState() {
@@ -19,21 +22,42 @@ class _HomePageState extends State<HomePage> {
     load();
   }
 
+  //set
+//   SharedPreferences pref = await SharedPreferences.getInstance();
+// Map json = jsonDecode(jsonString);
+// String user = jsonEncode(UserModel.fromJson(json));
+// pref.setString('userData', user);
+
   Future load() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      alarmTimeList = prefs.getStringList("alarmTimeList");
-      alarmNameList = prefs.getStringList("alarmNameList");
+      var alarmStrings = prefs.getStringList("alarmTimeList");
+      if (alarmStrings == null) {
+        alarmStrings = List();
+      }
+      final List<AlarmModel> alarmMaps =
+          alarmStrings.map((alarm) => jsonDecode(alarm)).toList();
+      alarmList = alarmMaps;
+      // alarmList =
+      //     alarmMaps.forEach((alarm) => AlarmModel.fromJson(alarm));
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(8.0),
-        itemCount: alarmTimeList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return AlarmItem(alarmTimeList[index], alarmNameList[index]);
-        });
+    return Scaffold(
+      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      body: ListView.builder(
+          padding: const EdgeInsets.all(8.0),
+          itemCount: alarmList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return AlarmItem(alarmList[index]);
+          }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: Router.toAdd,
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }

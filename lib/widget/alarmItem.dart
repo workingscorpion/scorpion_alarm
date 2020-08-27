@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:scorpion_alarm_app/model/alarmModel.dart';
 
 class AlarmItem extends StatelessWidget {
-  AlarmItem(this.time, this.name);
+  AlarmItem(this.alarm);
 
-  String time;
-  String name;
+  AlarmModel alarm;
 
   @override
   Widget build(BuildContext context) {
