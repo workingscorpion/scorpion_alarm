@@ -1,27 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:scorpion_alarm_app/pages/home.dart';
 import 'package:scorpion_alarm_app/pages/splash.dart';
-// import 'package:mobx/mobx.dart';
-// import 'package:scorpion_alarm_app/pages/auth/loginPage.dart';
-// import 'package:scorpion_alarm_app/pages/hotel/selectHotelPage.dart';
-// import 'package:scorpion_alarm_app/pages/issue/issueDetailPage.dart';
-// import 'package:scorpion_alarm_app/pages/issue/reservedIssuePage.dart';
-// import 'package:scorpion_alarm_app/pages/issue/writeIssuePage.dart';
-// import 'package:scorpion_alarm_app/pages/main/homePage.dart';
-// import 'package:scorpion_alarm_app/pages/main/splashPage.dart';
-// import 'package:scorpion_alarm_app/pages/member/memberListPage.dart';
-// import 'package:scorpion_alarm_app/pages/modal/filterModal.dart';
-// import 'package:scorpion_alarm_app/pages/modal/selectCategoryModal.dart';
-// import 'package:scorpion_alarm_app/pages/modal/selectTeamModal.dart';
-// import 'package:scorpion_alarm_app/pages/note/noteDetailPage.dart';
-// import 'package:scorpion_alarm_app/pages/note/noteListPage.dart';
-// import 'package:scorpion_alarm_app/pages/notice/noticeDetailPage.dart';
-// import 'package:scorpion_alarm_app/pages/notice/writeNoticePage.dart';
-// import 'package:scorpion_alarm_app/pages/settings/helpCenterPage.dart';
-// import 'package:scorpion_alarm_app/pages/settings/settingsPage.dart';
 import 'package:scorpion_alarm_app/router/routeNames.dart';
-// import 'package:scorpion_alarm_app/stores/issue/issueStore.dart';
 import 'package:scorpion_alarm_app/stores/navigationStore.dart';
-// import 'package:scorpion_alarm_app/utils/topDownModalRoute.dart';
+// import 'package:mobx/mobx.dart';
+// import 'package:scorpion_alarm_app/pages/settings/settingsPage.dart';
 
 class Router {
   static NavigationStore get _navigationStore => NavigationStore.instance;
@@ -40,11 +23,11 @@ class Router {
       //       settings: settings,
       //     );
 
-      //   case RouteNames.Home:
-      //     return MaterialPageRoute(
-      //       builder: (context) => HomePage(),
-      //       settings: settings,
-      //     );
+      case RouteNames.Home:
+        return MaterialPageRoute(
+          builder: (context) => HomePage(),
+          settings: settings,
+        );
 
       //   case RouteNames.SelectHotel:
       //     return MaterialPageRoute(
@@ -156,7 +139,7 @@ class Router {
 
   // static toLogin() => _navigationStore.reset(RouteNames.Login);
 
-  // static toHome() => _navigationStore.reset(RouteNames.Home);
+  static toHome() => _navigationStore.reset(RouteNames.Home);
 
   // static toSelectHotel() => _navigationStore.reset(RouteNames.SelectHotel);
 
