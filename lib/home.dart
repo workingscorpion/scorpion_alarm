@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:scorpion_alarm_app/widget/alarmItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Home extends StatefulWidget {
-  Home({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
   List<String> alarmTimeList = List();
   List<String> alarmNameList = List();
 
