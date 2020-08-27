@@ -2,6 +2,8 @@ class RouteNames {
   static const String Splash = '/';
   static const String Home = '/home';
 
+  static const String Add = '/add';
+
   // hotel
   // static const String CreateHotel = '/hotel/create';
   // static const String SelectHotel = '/hotel/select';

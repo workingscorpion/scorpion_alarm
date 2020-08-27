@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scorpion_alarm_app/pages/addAlarm.dart';
 import 'package:scorpion_alarm_app/pages/home.dart';
 import 'package:scorpion_alarm_app/pages/splash.dart';
 import 'package:scorpion_alarm_app/router/routeNames.dart';
@@ -17,17 +18,23 @@ class Router {
           settings: settings,
         );
 
-      //   case RouteNames.Login:
-      //     return MaterialPageRoute(
-      //       builder: (context) => LoginPage(),
-      //       settings: settings,
-      //     );
-
       case RouteNames.Home:
         return MaterialPageRoute(
           builder: (context) => HomePage(),
           settings: settings,
         );
+
+      case RouteNames.Add:
+        return MaterialPageRoute(
+          builder: (context) => AddAlarmPage(),
+          settings: settings,
+        );
+
+      //   case RouteNames.Login:
+      //     return MaterialPageRoute(
+      //       builder: (context) => LoginPage(),
+      //       settings: settings,
+      //     );
 
       //   case RouteNames.SelectHotel:
       //     return MaterialPageRoute(
@@ -140,6 +147,8 @@ class Router {
   // static toLogin() => _navigationStore.reset(RouteNames.Login);
 
   static toHome() => _navigationStore.reset(RouteNames.Home);
+
+  static toAdd() => _navigationStore.push(RouteNames.Add);
 
   // static toSelectHotel() => _navigationStore.reset(RouteNames.SelectHotel);
 

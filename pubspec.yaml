@@ -31,6 +31,7 @@ dependencies:
 
   #ui
   tinycolor: ^1.0.2
+  flutter_datetime_picker: ^1.4.0
 
   #sharedPreferences
   shared_preferences: ^0.5.10
