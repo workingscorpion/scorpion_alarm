@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:scorpion_alarm_app/constants/prefKeys.dart';
 import 'package:scorpion_alarm_app/model/alarmModel.dart';
 import 'package:scorpion_alarm_app/router/router.dart';
-import 'package:scorpion_alarm_app/widget/alarmItem.dart';
+import 'package:scorpion_alarm_app/widgets/alarmItem.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,25 +23,22 @@ class _HomePageState extends State<HomePage> {
     load();
   }
 
-  //set
-//   SharedPreferences pref = await SharedPreferences.getInstance();
-// Map json = jsonDecode(jsonString);
-// String user = jsonEncode(UserModel.fromJson(json));
-// pref.setString('userData', user);
-
   Future load() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      var alarmStrings = prefs.getStringList("alarmTimeList");
-      if (alarmStrings == null) {
-        alarmStrings = List();
+      var alarmStrings = prefs.getStringList(PrefKeys.AlarmList);
+      if (alarmStrings != null) {
+        alarmStrings
+            .map((alarm) =>
+                alarmList.add(AlarmModel.fromJson(json.decode(alarm))))
+            .toList();
       }
-      final List<AlarmModel> alarmMaps =
-          alarmStrings.map((alarm) => jsonDecode(alarm)).toList();
-      alarmList = alarmMaps;
-      // alarmList =
-      //     alarmMaps.forEach((alarm) => AlarmModel.fromJson(alarm));
     });
+  }
+
+  Future removeAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.remove(PrefKeys.AlarmList);
   }
 
   @override
@@ -54,9 +52,28 @@ class _HomePageState extends State<HomePage> {
           itemBuilder: (BuildContext context, int index) {
             return AlarmItem(alarmList[index]);
           }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: Router.toAdd,
-        child: Icon(Icons.add),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Positioned(
+            bottom: 80.0,
+            right: 10.0,
+            child: FloatingActionButton(
+              heroTag: 'delete',
+              onPressed: removeAll,
+              child: Icon(Icons.delete),
+            ),
+          ),
+          Positioned(
+            bottom: 10.0,
+            right: 10.0,
+            child: FloatingActionButton(
+              heroTag: 'add',
+              onPressed: Router.toAdd,
+              child: Icon(Icons.add),
+            ),
+          ),
+        ],
       ),
     );
   }
