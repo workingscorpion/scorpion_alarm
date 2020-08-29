@@ -1,4 +1,4 @@
-package com.example.scorpion_alarm_app
+package com.scorpion.money_alarm
 
 import io.flutter.embedding.android.FlutterActivity
 
